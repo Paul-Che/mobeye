@@ -70,10 +70,34 @@ export function level2(data) {
 export function level3(data) {
   const articles = data.articles;
   const carts = data.carts;
-  const deliveryFees = data.delivery_fees;
   const discounts = data.discounts;
 
-  const result = {};
+  // Price is a function that render price per article_id
+  const price = id => {
+    return articles.find(article => article.id === id).price;
+  }
 
-  return result;
+  // getDiscount is a function that render the discount amout per article
+  const getDiscount = (id, price) => {
+  	const discount = discounts.find(disc => disc.article_id === id);
+    if (discount) {
+    	switch(discount.type) {
+      case 'amount':
+				price = -discount.value;
+        break;
+      case 'percentage':
+        price = -(price * discount.value / 100);
+        break;
+      default:
+        price += 0;
+    	}
+      return price;
+    } else {
+    	return 0
+    }
+  }
+
+  
+
+  return { carts: results };
 }
