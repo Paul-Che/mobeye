@@ -105,5 +105,16 @@ export function level3(data) {
     }, 0);
   }
 
+  // addFees is a function that render the price of the fee considering total cost
+  const addFees = cost => {
+    if (cost >= deliveryFees.slice(-1)[0].eligible_transaction_volume.min_price) {
+    	return 0
+    } else {
+      return deliveryFees.find(item => item.eligible_transaction_volume.min_price <= cost &&
+                                 item.eligible_transaction_volume.max_price > cost).price;
+    }
+  }
+  
+
   return { carts: results };
 }
