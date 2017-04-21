@@ -39,13 +39,22 @@ export function level1(data) {
  * @return {object}   See `./src/__tests__/__snapshots/level2.js.snap`
  */
 export function level2(data) {
-  const articles = data.articles;
-  const carts = data.carts;
   const deliveryFees = data.delivery_fees;
 
-  const result = {};
+  const addFees = cost => {
+    if (cost >= deliveryFees.slice(-1)[0].eligible_transaction_volume.min_price) {
+    	return 0
+    } else {
+      return deliveryFees.find(item =>
+        item.eligible_transaction_volume.min_price <= cost &&
+        item.eligible_transaction_volume.max_price > cost).price;
+    }
+  }
 
-  return result;
+  const result = level1(data).carts;
+  result.forEach((cart) => cart.total += addFees(cart.total));
+
+  return { carts: result };
 }
 
 /**
