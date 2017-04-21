@@ -16,6 +16,12 @@ export function level1(data) {
     return articles.find(article => article.id === article_id ).price;
   }
 
+  // Total is a function that render the total cost amount per cart
+  const total = items => {
+  	return items.reduce((sum, item) => {
+      return sum + item.quantity * price(item.article_id);
+    }, 0);
+  }
   
 }
 
