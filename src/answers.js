@@ -11,9 +11,12 @@ export function level1(data) {
   const articles = data.articles;
   const carts = data.carts;
 
-  const result = {};
+  // Price is a function that render price per article_id
+  const price = article_id => {
+    return articles.find(article => article.id === article_id ).price;
+  }
 
-  return result;
+  
 }
 
 /**
