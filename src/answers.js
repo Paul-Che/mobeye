@@ -114,7 +114,13 @@ export function level3(data) {
                                  item.eligible_transaction_volume.max_price > cost).price;
     }
   }
-  
+
+  const results = [];
+  carts.forEach((cart) => {
+    let result = { id: cart.id, total: total(cart.items) };
+    results.push(result);
+  });
+  results.forEach((cart) => cart.total += addFees(cart.total));
 
   return { carts: results };
 }
