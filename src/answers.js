@@ -23,6 +23,13 @@ export function level1(data) {
     }, 0);
   }
   
+  const results = [];
+  carts.forEach((cart) => {
+    let result = { id: cart.id, total: total(cart.items) };
+    results.push(result);
+  });
+
+  return results;
 }
 
 /**
