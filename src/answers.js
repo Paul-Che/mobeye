@@ -70,6 +70,7 @@ export function level2(data) {
 export function level3(data) {
   const articles = data.articles;
   const carts = data.carts;
+  const deliveryFees = data.delivery_fees;
   const discounts = data.discounts;
 
   // Price is a function that render price per article_id
