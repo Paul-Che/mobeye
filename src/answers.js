@@ -22,14 +22,14 @@ export function level1(data) {
       return sum + item.quantity * price(item.article_id);
     }, 0);
   }
-  
+
   const results = [];
   carts.forEach((cart) => {
     let result = { id: cart.id, total: total(cart.items) };
     results.push(result);
   });
 
-  return results;
+  return { carts: results };
 }
 
 /**
