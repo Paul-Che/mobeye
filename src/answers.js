@@ -97,7 +97,13 @@ export function level3(data) {
     }
   }
 
-  
+  // Total is a function that render the total cost amount per cart
+  const total = items => {
+  	return items.reduce((sum, item) => {
+      const id = item.article_id
+      return sum + item.quantity * Math.round(price(id) + getDiscount(id, price(id)));
+    }, 0);
+  }
 
   return { carts: results };
 }
